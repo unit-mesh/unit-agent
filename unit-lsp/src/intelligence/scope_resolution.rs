@@ -1,9 +1,4 @@
 #[cfg(test)]
-mod debug;
-mod def;
-mod reference;
-mod scope;
-
 pub use def::LocalDef;
 pub use reference::Reference;
 pub use scope::{LocalScope, ScopeStack};

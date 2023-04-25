@@ -12,9 +12,8 @@ struct Language {
     r#type: String,
     aliases: Option<Vec<String>>,
 }
-
 fn main() {
-    set_index_version();
+    // set_index_version();
     process_languages();
 }
 
@@ -89,5 +88,5 @@ fn process_languages() {
     )
         .unwrap();
 
-    println!("cargo:rerun-if-changed=languages.yml");
+    println!("cargo:rerun-if-changed=../languages.yml");
 }

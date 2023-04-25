@@ -2,14 +2,36 @@
 name = "unit-lsp"
 version = "0.1.0"
 edition = "2021"
+default-run = "ulsp"
 build = "build.rs"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
+[[bin]]
+name = "ulsp"
+
 [dependencies]
+# core
+tantivy = { version = "0.19.1", features = ["mmap"] }
+tokio = { version = "1.24.2", features = ["macros", "process", "rt", "rt-multi-thread", "io-std", "io-util", "sync", "fs"] }
+futures = "0.3.25"
+rayon = "1.6.1"
+clap = { version = "4.1.4", features = ["derive"] }
+tracing = "0.1.37"
+tracing-subscriber = { version = "0.3.16", features = ["env-filter", "registry"] }
+color-eyre = "0.6.2"
+
+# for debugging
+console-subscriber = { version = "0.1.8", optional = true }
+histogram = { version = "0.7.0", optional = true }
+
 # error handling
 anyhow = "1.0.68"
 thiserror = "1.0.38"
+
+# query parsing
+pest = "2.5.4"
+pest_derive = "2.5.4"
 
 # code-nav
 tree-sitter = "0.20.9"
@@ -27,7 +49,9 @@ petgraph = { version = "0.6.2", default-features = false, features = ["serde-1"]
 # webserver
 serde = "1.0.152"
 serde_json = "1.0.91"
+erased-serde = "0.3.25"
 
+once_cell = "1.17.0"
 
 [build-dependencies]
 phf_codegen = "0.11.1"
