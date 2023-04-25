@@ -70,6 +70,7 @@ impl<'a> TreeSitterFile<'a> {
             .map_err(TreeSitterFileError::QueryError)?;
         let root_node = self.tree.root_node();
 
+        println!("query: {:?}", query);
         println!("root_node: {:?}", root_node);
         println!("root_node.kind(): {:?}", root_node.kind());
 
