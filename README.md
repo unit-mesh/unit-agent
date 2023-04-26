@@ -9,6 +9,10 @@ Todos:
 - [ ] TreeSitter parser for unit
 - [ ] Json RPC server
 - [ ] CLI
+- [ ] Support completion type
+  - [ ] Inline
+  - [ ] AfterLineEnd
+  - [ ] Block
 
 ## LICENSE
 

@@ -7,8 +7,8 @@ pub use {
     namespace::*,
     scope_resolution::{NodeKind, ScopeGraph},
 };
-use scope_resolution::ResolutionMethod;
 
+use scope_resolution::ResolutionMethod;
 use tree_sitter::{Parser, Tree};
 
 /// A tree-sitter representation of a file
@@ -76,4 +76,3 @@ impl<'a> TreeSitterFile<'a> {
         Ok(ResolutionMethod::Generic.build_scope(query, root_node, self.src, self.language))
     }
 }
-
