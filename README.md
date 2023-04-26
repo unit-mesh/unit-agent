@@ -1,7 +1,8 @@
-# unit-lsp
+# Unit Lsp TreeSitter
 
-pleases use: [https://github.com/unit-mesh/treesitter-artifacts](https://github.com/unit-mesh/treesitter-artifacts)
+based on: [https://github.com/BloopAI/bloop/tree/main](https://github.com/BloopAI/bloop/tree/main)
 
-Rust: https://github.com/BloopAI/bloop/tree/main/server/bleep/src/intelligence/language
+## LICENSE
 
-Rust Guarding: https://github.com/modernizing/guarding
+Apache 2.0
+
