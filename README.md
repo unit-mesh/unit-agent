@@ -1,4 +1,6 @@
-# Unit Lsp TreeSitter
+# Unit LSP TreeSitter
+
+[![Build](https://github.com/unit-mesh/unit-lsp-server/actions/workflows/ci.yml/badge.svg)](https://github.com/unit-mesh/unit-lsp-server/actions/workflows/ci.yml)
 
 based on: [https://github.com/BloopAI/bloop/tree/main](https://github.com/BloopAI/bloop/tree/main)
 
