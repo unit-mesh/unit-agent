@@ -1,10 +1,13 @@
 mod language;
 mod namespace;
+mod scope_resolution;
 
 pub use {
     language::{Language, MemoizedQuery, TSLanguage, TSLanguageConfig, ALL_LANGUAGES},
     namespace::*,
+    scope_resolution::{NodeKind, ScopeGraph},
 };
+use scope_resolution::ResolutionMethod;
 
 use tree_sitter::{Parser, Tree};
 
@@ -62,7 +65,7 @@ impl<'a> TreeSitterFile<'a> {
     }
 
     /// Produce a lexical scope-graph for this TreeSitterFile.
-    pub fn scope_graph(self) -> Result<i32, TreeSitterFileError> {
+    pub fn scope_graph(self) -> Result<ScopeGraph, TreeSitterFileError> {
         let query = self
             .language
             .scope_query
@@ -70,11 +73,7 @@ impl<'a> TreeSitterFile<'a> {
             .map_err(TreeSitterFileError::QueryError)?;
         let root_node = self.tree.root_node();
 
-        println!("query: {:?}", query);
-        println!("root_node: {:?}", root_node);
-        println!("root_node.kind(): {:?}", root_node.kind());
-
-        Ok(1)
+        Ok(ResolutionMethod::Generic.build_scope(query, root_node, self.src, self.language))
     }
 }
 
