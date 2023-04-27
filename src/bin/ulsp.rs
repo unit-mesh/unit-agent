@@ -25,5 +25,6 @@ fn main() {
 
     let tsf = TreeSitterFile::try_build(src, lang_id).unwrap();
     let scope_graph = tsf.scope_graph().unwrap();
-    println!("{:?}", scope_graph)
+    println!("{:?}", scope_graph);
+    println!("{:?}", scope_graph.graph);
 }
