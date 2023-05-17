@@ -60,6 +60,11 @@ tower-http = { version = "0.3.5", features = ["auth", "cors", "catch-panic", "fs
 
 once_cell = "1.17.0"
 
+# RPC Server
+jsonrpc-core = "18.0.0"
+#jsonrpc-ipc-server = "15.0"
+jsonrpc-stdio-server = "15.0"
+
 [build-dependencies]
 phf_codegen = "0.11.1"
 serde = { version = "1.0.152", features = ["derive"] }

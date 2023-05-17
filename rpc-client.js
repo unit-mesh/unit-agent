@@ -17,7 +17,6 @@ let connection = rpc.createMessageConnection(
 );
 
 connection.listen();
-//
 connection.sendRequest(new rpc.NotificationType('initialize'), {
     "capabilities": {
         "textDocument": {"synchronization": {"dynamicRegistration": true}},
@@ -28,11 +27,11 @@ connection.sendRequest(new rpc.NotificationType('initialize'), {
     }]
 });
 
-connection.sendRequest(new rpc.NotificationType('setEditorInfo'), {
-    "editorInfo": {
-        "name": "JetBrains-IC",
-        "version": "222.3345.118"
-    },
-    "editorPluginInfo": {"name": "copilot-intellij", "version": "0.2.0"},
-    "editorConfiguration": {"showEditorCompletions": false, "enableAutoCompletions": true, "disabledLanguages": []}
-});
+// connection.sendRequest(new rpc.NotificationType('setEditorInfo'), {
+//     "editorInfo": {
+//         "name": "JetBrains-IC",
+//         "version": "222.3345.118"
+//     },
+//     "editorPluginInfo": {"name": "copilot-intellij", "version": "0.2.0"},
+//     "editorConfiguration": {"showEditorCompletions": false, "enableAutoCompletions": true, "disabledLanguages": []}
+// });

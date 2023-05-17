@@ -1,8 +1,20 @@
+use jsonrpc_stdio_server::ServerBuilder;
+use jsonrpc_stdio_server::jsonrpc_core::*;
+use jsonrpc_stdio_server::jsonrpc_core::futures::Future;
 use unit_lsp::intelligence::{Language, TreeSitterFile};
 
 fn main() {
-    println!("Hello, world!");
+    let mut io = IoHandler::default();
 
+    io.add_method("initialize", |_params| {
+        Ok(Value::String("hello".to_owned()))
+    });
+
+    ServerBuilder::new(io).build();
+    // try_parse_by_language();
+}
+
+fn try_parse_by_language() {
     let src = r#"
             #include <stdio.h>
 
