@@ -1,5 +1,6 @@
 use jsonrpc_stdio_server::ServerBuilder;
 use jsonrpc_stdio_server::jsonrpc_core::*;
+use jsonrpc_stdio_server::jsonrpc_core::Call::MethodCall;
 use jsonrpc_stdio_server::jsonrpc_core::futures::Future;
 use unit_lsp::intelligence::{Language, TreeSitterFile};
 

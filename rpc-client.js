@@ -25,6 +25,8 @@ connection.sendRequest(new rpc.NotificationType('initialize'), {
     "workspaceFolders": [{
         "uri": "file:///Volumes/source/ai/gpt-samples/ddd-monolithic-code-sample"
     }]
+}).then(r => {
+    console.log(r);
 });
 
 // connection.sendRequest(new rpc.NotificationType('setEditorInfo'), {
