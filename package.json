@@ -1,0 +1,23 @@
+{
+  "name": "unit-lsp",
+  "version": "1.0.0",
+  "description": "[![Build](https://github.com/unit-mesh/unit-lsp-server/actions/workflows/ci.yml/badge.svg)](https://github.com/unit-mesh/unit-lsp-server/actions/workflows/ci.yml)",
+  "main": "rpc-client.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/unit-mesh/unit-lsp-server.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/unit-mesh/unit-lsp-server/issues"
+  },
+  "homepage": "https://github.com/unit-mesh/unit-lsp-server#readme",
+  "dependencies": {
+    "vscode-jsonrpc": "^8.1.0"
+  }
+}
