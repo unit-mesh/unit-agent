@@ -29,8 +29,14 @@ Support for IDE features:
 - [ ] Context Engineering
   - [ ] Open Tabs
   - [ ] Related Files
-  - [ ]  with DependencyContext
+  - [ ] with Dependency Context
     - [ ] parse Gradle for dependencies
+  
+## JSON RPC Protocol
+
+- Protocol Specification (compatible with Copilot ?)
+  - initialize
+  - workspace/dependencies
 
 ## LICENSE
 
