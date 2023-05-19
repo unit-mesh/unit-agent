@@ -1,39 +1,53 @@
-const {spawn} = require('node:child_process');
-const rpc = require('vscode-jsonrpc/node');
+import {execa} from 'execa';
 
-let childProcess = spawn('target/debug/ulsp', []);
+async function main() {
+    const child = execa('target/debug/ulsp', [], {});
 
-childProcess.stdout.on('data', function (data) {
-    console.log(data.toString());
+    child.on('close', (data) => {
+        console.log(data);
+    });
+
+    child.stdout.setEncoding('utf8');
+    child.stderr.setEncoding('utf8');
+
+    child.stdout.on('data', function (raw) {
+        console.log(raw);
+        parseMessages(raw).forEach((msg) => {
+            console.log(msg);
+        });
+    });
+    child.stderr.on('data', function (data) {
+        console.log(`${data}`);
+    });
+
+    function parseMessages(raw) {
+        const parsed = [];
+        const lines = raw.split('\n');
+
+        for (let i = 0; i < lines.length; ++i) {
+            if (typeof lines[i] !== 'string' || lines[i] === '') {
+                continue;
+            }
+            try {
+                parsed.push(JSON.parse(lines[i]));
+            } catch (err) {
+                console.warn('Error parsing message from core!');
+                console.error(err);
+            }
+        }
+
+        return parsed;
+    }
+
+    console.log('Sending initialize message to core');
+
+    child.stdin.write(`${JSON.stringify({
+        method: 'initialize',
+    })}`);
+
+    return child;
+}
+
+await main().then((child) => {
+    console.log(child)
 });
-
-childProcess.stdin.on('data', function (data) {
-    console.log(data.toString());
-});
-
-let connection = rpc.createMessageConnection(
-    new rpc.StreamMessageReader(childProcess.stdout),
-    new rpc.StreamMessageWriter(childProcess.stdin)
-);
-
-connection.listen();
-connection.sendRequest(new rpc.NotificationType('initialize'), {
-    "capabilities": {
-        "textDocument": {"synchronization": {"dynamicRegistration": true}},
-        "workspace": {"isWorkspaceFolders": true}
-    },
-    "workspaceFolders": [{
-        "uri": "file:///Volumes/source/ai/gpt-samples/ddd-monolithic-code-sample"
-    }]
-}).then(r => {
-    console.log(r);
-});
-
-// connection.sendRequest(new rpc.NotificationType('setEditorInfo'), {
-//     "editorInfo": {
-//         "name": "JetBrains-IC",
-//         "version": "222.3345.118"
-//     },
-//     "editorPluginInfo": {"name": "copilot-intellij", "version": "0.2.0"},
-//     "editorConfiguration": {"showEditorCompletions": false, "enableAutoCompletions": true, "disabledLanguages": []}
-// });

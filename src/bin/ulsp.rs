@@ -7,6 +7,7 @@ use unit_lsp::intelligence::{Language, TreeSitterFile};
 fn main() {
     let mut io = IoHandler::default();
 
+    // println!("initialize");
     io.add_method("initialize", |_params| {
         Ok(Value::String("hello".to_owned()))
     });
@@ -17,7 +18,7 @@ fn main() {
 
 fn try_parse_by_language() {
     let src = r#"
-            #include <stdio.h>
+            #include <stdio.h>ª
 
             #define PI 355/113
             #define AREA(r) PI * r * r
