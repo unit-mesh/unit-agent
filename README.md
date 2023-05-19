@@ -8,7 +8,7 @@ based on: [https://github.com/BloopAI/bloop/tree/main](https://github.com/BloopA
 Todos:
 
 - [ ] TreeSitter parser for unit
-- [ ] Json RPC server
+- [ ] Json RPC server with [xi-rpc](https://crates.io/crates/xi-rpc)
   - [ ] CLI
 - [ ] Support completion type
   - [ ] Inline
