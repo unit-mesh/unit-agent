@@ -14,6 +14,24 @@ Todos:
     - [ ] AfterLineEnd
     - [ ] Block
 
+Support for IDE features:
+
+- [ ] Chat with IDE
+  - [ ] Generate test
+  - [ ] 实现：`重现 xx 功能`, `devti:/chat/feature`
+  - [ ] 重构：`重构 xx 方法`
+  - [ ] 替换：`替换 xx 方法`，`devti:/refactor/method`
+- [x] Custom LLM Server
+- [ ] Telemetry Server
+  - [ ] Accept
+  - [ ] Reject
+  - [ ] Feedback
+- [ ] Context Engineering
+  - [ ] Open Tabs
+  - [ ] Related Files
+  - [ ]  with DependencyContext
+    - [ ] parse Gradle for dependencies
+
 ## LICENSE
 
 Apache 2.0
