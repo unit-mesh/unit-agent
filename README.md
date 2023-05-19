@@ -9,7 +9,7 @@ Todos:
 
 - [ ] TreeSitter parser for unit
 - [ ] Json RPC server
-- [ ] CLI
+  - [ ] CLI
 - [ ] Support completion type
   - [ ] Inline
   - [ ] AfterLineEnd

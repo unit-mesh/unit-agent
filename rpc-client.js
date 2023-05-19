@@ -11,7 +11,6 @@ async function main() {
     child.stderr.setEncoding('utf8');
 
     child.stdout.on('data', function (raw) {
-        console.log(raw);
         parseMessages(raw).forEach((msg) => {
             console.log(msg);
         });
@@ -41,9 +40,20 @@ async function main() {
 
     console.log('Sending initialize message to core');
 
-    child.stdin.write(`${JSON.stringify({
-        method: 'initialize',
-    })}`);
+    function send(method, params, rest) {
+        const data = {method, params, ...rest};
+        try {
+            child.stdin.write(`${JSON.stringify(data)}\n`);
+            return true;
+        } catch (e) {
+            console.error(e);
+            return false;
+        }
+    }
+
+    // {"method":"client_started","params":{}}
+    // https://github.com/phodal/stadal/blob/master/gui/src/render/core.ts#L52
+    send('client_started', {});
 
     return child;
 }
