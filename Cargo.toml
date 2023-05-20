@@ -2,13 +2,13 @@
 name = "unit-lsp"
 version = "0.1.1"
 edition = "2021"
-default-run = "ulsp"
+default-run = "unit_agent"
 build = "build.rs"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [[bin]]
-name = "ulsp"
+name = "unit_agent"
 
 [dependencies]
 # core
