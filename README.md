@@ -31,7 +31,8 @@ Support for IDE features:
   - [ ] Related Files
   - [ ] with Dependency Context
     - [ ] parse Gradle for dependencies
-  
+- [ ] Local Model  
+
 ## JSON RPC Protocol
 
 - Protocol Specification (compatible with Copilot ?)
