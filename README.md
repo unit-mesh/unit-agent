@@ -32,8 +32,8 @@ Support for IDE features:
   - [ ] with Dependency Context
     - [ ] parse Gradle for dependencies
 - [ ] Local Model  
-  - [ ] Local Embedding
-  - [ ] Max Token Usage
+  - [ ] Local Embedding with Onnx ?
+  - [ ] Max Token Usage with Model specific ?
 
 ## JSON RPC Protocol
 
