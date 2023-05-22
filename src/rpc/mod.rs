@@ -6,7 +6,6 @@ use xi_rpc::{RemoteError, RpcPeer};
 
 use client::Client;
 use notification::CoreNotification;
-use notification::CoreNotification::ClientStarted;
 use request::CoreRequest;
 
 mod notification;
@@ -28,7 +27,7 @@ impl CoreState {
 
     pub(crate) fn client_notification(&mut self, cmd: CoreNotification) {
         match cmd {
-            CoreNotification::Config { .. } => {}
+            CoreNotification::ClientStarted { .. } => {}
         }
     }
 
@@ -36,6 +35,9 @@ impl CoreState {
         use request::CoreRequest::*;
         match cmd {
             Version { .. } => {
+                Ok(json!(1))
+            }
+            Config { .. } => {
                 Ok(json!(1))
             }
         }
