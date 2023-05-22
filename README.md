@@ -58,4 +58,4 @@ Support for IDE features:
 
 ## LICENSE
 
-Apache 2.0
+This code is distributed under the Apache 2.0 license. See `LICENSE` in this directory.
