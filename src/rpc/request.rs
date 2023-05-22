@@ -6,9 +6,6 @@ use serde::{Deserialize, Serialize};
 pub enum CoreRequest {
     Config {
         open_ai_token: String,
-        open_ai_url: String,
-    },
-    Version {
-        version: String,
+        open_ai_url: Option<String>,
     }
 }

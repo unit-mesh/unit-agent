@@ -38,8 +38,6 @@ async function main() {
         return parsed;
     }
 
-    console.log('Sending initialize message to core');
-
     function send(method, params, rest) {
         const data = {method, params, ...rest};
         try {
@@ -54,7 +52,7 @@ async function main() {
     // {"method":"client_started","params":{}}
     // https://github.com/phodal/stadal/blob/master/gui/src/render/core.ts#L52
     send('client_started', {});
-    send('config', {});
+    send('config', {"open_ai_token": "sk-xxx",}, {id: 0});
 
     return child;
 }

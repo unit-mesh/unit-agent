@@ -16,12 +16,14 @@ mod client;
 #[allow(dead_code)]
 pub struct CoreState {
     peer: Client,
+    token: Option<String>,
 }
 
 impl CoreState {
     pub(crate) fn new(peer: &RpcPeer) -> Self {
         CoreState {
             peer: Client::new(peer.clone()),
+            token: None,
         }
     }
 
@@ -34,11 +36,12 @@ impl CoreState {
     pub(crate) fn client_request(&mut self, cmd: CoreRequest) -> Result<Value, RemoteError> {
         use request::CoreRequest::*;
         match cmd {
-            Version { .. } => {
-                Ok(json!(1))
-            }
-            Config { .. } => {
-                Ok(json!(1))
+            Config { open_ai_token, .. } => {
+                self.token = Some(open_ai_token);
+                Ok(json!({
+                    "success": true,
+                    "name": "client",
+                }))
             }
         }
     }
