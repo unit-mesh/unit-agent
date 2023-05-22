@@ -1,28 +1,28 @@
 import {execa} from 'execa';
 
-async function main() {
-    const child = execa('target/debug/unit_agent', [], {});
-
-    child.on('close', (data) => {
-        console.log(data);
-    });
-
-    child.stdout.setEncoding('utf8');
-    child.stderr.setEncoding('utf8');
-
-    child.stdout.on('data', function (raw) {
-        parseMessages(raw).forEach((msg) => {
-            console.log(msg);
+class RpcClient {
+    constructor() {
+        this.child = execa('target/debug/unit_agent', [], {});
+        this.child.on('close', (data) => {
+            console.log(data);
         });
-    });
-    child.stderr.on('data', function (data) {
-        console.log(`${data}`);
-    });
+        this.child.stdout.setEncoding('utf8');
+        this.child.stderr.setEncoding('utf8');
 
-    function parseMessages(raw) {
+        this.child.stdout.on('data', (raw) => {
+            this.parse(raw).forEach((msg) => {
+                console.log(msg);
+            });
+        });
+
+        this.child.stderr.on('data', (data) => {
+            console.info(`${data}`);
+        });
+    }
+
+    parse(raw) {
         const parsed = [];
         const lines = raw.split('\n');
-
         for (let i = 0; i < lines.length; ++i) {
             if (typeof lines[i] !== 'string' || lines[i] === '') {
                 continue;
@@ -34,14 +34,13 @@ async function main() {
                 console.error(err);
             }
         }
-
         return parsed;
     }
 
-    function send(method, params, rest) {
+    send(method, params, rest) {
         const data = {method, params, ...rest};
         try {
-            child.stdin.write(`${JSON.stringify(data)}\n`);
+            this.child.stdin.write(`${JSON.stringify(data)}\n`);
             return true;
         } catch (e) {
             console.error(e);
@@ -49,14 +48,11 @@ async function main() {
         }
     }
 
-    // {"method":"client_started","params":{}}
-    // https://github.com/phodal/stadal/blob/master/gui/src/render/core.ts#L52
-    send('client_started', {});
-    send('config', {"open_ai_token": "sk-xxx",}, {id: 0});
-
-    return child;
+    start() {
+        this.send('client_started', {});
+        this.send('config', {"open_ai_token": "sk-xxx"}, {id: 0});
+    }
 }
 
-await main().then((child) => {
-    console.log(child)
-});
+const client = new RpcClient();
+client.start();

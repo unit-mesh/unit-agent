@@ -53,7 +53,7 @@ impl CoreState {
     pub(crate) fn handle_idle(&mut self, token: usize) {
         match token {
             _ => {
-                info!("token: {}", token);
+                // info!("token: {}", token);
             }
         }
     }
