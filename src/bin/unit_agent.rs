@@ -6,7 +6,7 @@ use xi_rpc::RpcLoop;
 
 use tracing::log::{error, info, warn};
 use unit_lsp::intelligence::{Language, TreeSitterFile};
-use unit_lsp::lsp::Ulsp;
+use unit_lsp::rpc::unit_rpc::UnitRpc;
 
 fn create_log_directory(path_with_file: &Path) -> io::Result<()> {
     let log_dir = path_with_file.parent().ok_or_else(|| io::Error::new(
@@ -78,7 +78,7 @@ fn get_logging_directory_path<P: AsRef<Path>>(directory: P) -> Result<PathBuf, i
 }
 
 fn main() {
-    let mut state = Ulsp::new();
+    let mut state = UnitRpc::new();
     let stdin = io::stdin();
     let stdout = io::stdout();
     let mut rpc_looper = RpcLoop::new(stdout);
