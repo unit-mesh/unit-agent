@@ -16,6 +16,17 @@ fn create_log_directory(path_with_file: &Path) -> io::Result<()> {
             path_with_file.display(),
         ),
     ))?;
+
+    if log_dir.to_str().unwrap().is_empty() {
+        return Err(io::Error::new(
+            io::ErrorKind::InvalidInput,
+            format!(
+                "Unable to create log directory for the following Path: {}, Your path should contain a file name",
+                path_with_file.display(),
+            ),
+        ));
+    }
+
     fs::create_dir_all(log_dir)?;
     Ok(())
 }
@@ -125,4 +136,16 @@ fn try_parse_by_language() {
     let scope_graph = tsf.scope_graph().unwrap();
     println!("{:?}", scope_graph);
     println!("{:?}", scope_graph.graph);
+}
+
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_get_logging_directory_path() {
+        let expected_path = dirs::data_local_dir().unwrap().join("my_log_dir");
+        assert_eq!(get_logging_directory_path("my_log_dir").unwrap(), expected_path);
+    }
 }
