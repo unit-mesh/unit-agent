@@ -1,12 +1,12 @@
 use std::sync::{Mutex, Weak};
-use serde_json::{self, json, Value};
 
+use serde_json::{self, json, Value};
+use tracing::info;
 use xi_rpc::{RemoteError, RpcPeer};
 
-use tracing::info;
 use client::Client;
 use notification::CoreNotification;
-use notification::CoreNotification::{ClientStarted, TracingConfig};
+use notification::CoreNotification::ClientStarted;
 use request::CoreRequest;
 
 mod notification;

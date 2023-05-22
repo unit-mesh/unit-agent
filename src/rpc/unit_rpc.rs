@@ -1,10 +1,11 @@
 use std::sync::{Arc, Mutex, MutexGuard};
-use xi_rpc::{Handler, RemoteError, RpcCtx};
-use tracing::info;
+
 use serde_json::Value;
+use xi_rpc::{Handler, RemoteError, RpcCtx};
+
 use crate::rpc::{CoreState, WeakStadalCore};
 use crate::rpc::notification::CoreNotification;
-use crate::rpc::notification::CoreNotification::{ClientStarted, TracingConfig};
+use crate::rpc::notification::CoreNotification::ClientStarted;
 use crate::rpc::request::CoreRequest;
 
 pub enum UnitRpc {
