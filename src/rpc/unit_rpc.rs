@@ -3,7 +3,7 @@ use std::sync::{Arc, Mutex, MutexGuard};
 use serde_json::Value;
 use xi_rpc::{Handler, RemoteError, RpcCtx};
 
-use crate::rpc::{CoreState, WeakStadalCore};
+use crate::rpc::{CoreState, WeakCoreState};
 use crate::rpc::notification::CoreNotification;
 use crate::rpc::notification::CoreNotification::ClientStarted;
 use crate::rpc::request::CoreRequest;
@@ -45,9 +45,9 @@ impl UnitRpc {
     }
 
     /// Returns a new reference to the core state, if core is running.
-    fn weak_self(&self) -> Option<WeakStadalCore> {
+    fn weak_self(&self) -> Option<WeakCoreState> {
         match self {
-            UnitRpc::Running(ref inner) => Some(WeakStadalCore(Arc::downgrade(inner))),
+            UnitRpc::Running(ref inner) => Some(WeakCoreState(Arc::downgrade(inner))),
             UnitRpc::Waiting => None,
         }
     }

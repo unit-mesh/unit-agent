@@ -48,6 +48,7 @@ Support for IDE features:
   - workspace/file-change
   - workspace/file-close
 - Request
+  - config 
   - status/get
   - editor/info
   - version/get

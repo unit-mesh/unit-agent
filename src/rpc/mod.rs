@@ -28,7 +28,7 @@ impl CoreState {
 
     pub(crate) fn client_notification(&mut self, cmd: CoreNotification) {
         match cmd {
-            ClientStarted { .. } => (),
+            CoreNotification::Config { .. } => {}
         }
     }
 
@@ -41,7 +41,7 @@ impl CoreState {
         }
     }
 
-    pub(crate) fn finish_setup(&mut self, _self_ref: WeakStadalCore) {
+    pub(crate) fn finish_setup(&mut self, _self_ref: WeakCoreState) {
         self.peer.send_client_started()
     }
 
@@ -56,4 +56,4 @@ impl CoreState {
 
 /// A weak reference to the main state. This is passed to plugin threads.
 #[derive(Clone)]
-pub struct WeakStadalCore(Weak<Mutex<CoreState>>);
+pub struct WeakCoreState(Weak<Mutex<CoreState>>);

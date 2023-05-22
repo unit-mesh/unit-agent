@@ -69,6 +69,8 @@ xi-rpc = "0.3.0"
 chrono = "0.4.24"
 dirs = "5.0.1"
 
+async-openai = "0.10.3"
+
 [build-dependencies]
 phf_codegen = "0.11.1"
 serde = { version = "1.0.152", features = ["derive"] }

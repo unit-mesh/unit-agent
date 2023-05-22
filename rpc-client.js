@@ -54,6 +54,7 @@ async function main() {
     // {"method":"client_started","params":{}}
     // https://github.com/phodal/stadal/blob/master/gui/src/render/core.ts#L52
     send('client_started', {});
+    send('config', {});
 
     return child;
 }
