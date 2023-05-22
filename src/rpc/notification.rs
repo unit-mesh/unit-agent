@@ -8,7 +8,10 @@ pub enum CoreNotification {
     TracingConfig {
         enabled: bool,
     },
-    SendInitialize {},
+    Version {
+        version: String,
+    },
+    Initialize {},
     ClientStarted {
         #[serde(default)]
         config_dir: Option<PathBuf>,

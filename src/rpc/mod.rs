@@ -1,15 +1,12 @@
-use std::path::PathBuf;
-use std::sync::{Arc, Mutex, MutexGuard, Weak};
+use std::sync::{Mutex, Weak};
 use serde_json::{self, json, Value};
-use serde::{Deserialize, Serialize};
 
-use xi_rpc::{Handler, RemoteError, RpcCtx, RpcPeer};
+use xi_rpc::{RemoteError, RpcPeer};
 
-use futures::executor;
 use tracing::info;
 use client::Client;
 use notification::CoreNotification;
-use notification::CoreNotification::{ClientStarted, SendInitialize, TracingConfig};
+use notification::CoreNotification::{ClientStarted, Initialize, TracingConfig, Version};
 use request::CoreRequest;
 
 mod notification;
@@ -31,13 +28,12 @@ impl CoreState {
 
     pub(crate) fn client_notification(&mut self, cmd: CoreNotification) {
         match cmd {
-            SendInitialize {} => {
+            Initialize {} => {
                 self.peer.send_initialize();
             }
             ClientStarted { .. } => (),
-            _ => {
-                // self.not_command(view_id, language_id);
-            }
+            TracingConfig { .. } => {}
+            Version { .. } => {}
         }
     }
 
@@ -48,7 +44,7 @@ impl CoreState {
         }
     }
 
-    pub(crate) fn finish_setup(&mut self, self_ref: WeakStadalCore) {
+    pub(crate) fn finish_setup(&mut self, _self_ref: WeakStadalCore) {
         self.peer.0.send_rpc_notification("config_status", &json!({ "success": true }))
     }
 

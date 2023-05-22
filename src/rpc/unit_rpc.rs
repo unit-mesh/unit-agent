@@ -58,30 +58,32 @@ impl Handler for UnitRpc {
 
     fn handle_notification(&mut self, ctx: &RpcCtx, rpc: Self::Notification) {
         // We allow tracing to be enabled before event `client_started`
-        if let TracingConfig { enabled } = rpc {
-            info!("tracing in core = {:?}", enabled);
-            if self.is_waiting() {
-                return;
+        match rpc {
+            TracingConfig { enabled } => {
+                info!("tracing in core = {:?}", enabled);
+                if self.is_waiting() {
+                    return;
+                }
             }
-        }
-
-        if let ClientStarted {
-            ref config_dir,
-            ref client_extras_dir,
-        } = rpc
-        {
-            assert!(self.is_waiting(), "client_started can only be sent once");
-            let state = CoreState::new(ctx.get_peer());
-            let state = Arc::new(Mutex::new(state));
-            *self = UnitRpc::Running(state);
-            let weak_self = self.weak_self().unwrap();
-            self.inner().finish_setup(weak_self);
+            ClientStarted {
+                ref config_dir,
+                ref client_extras_dir,
+            } => {
+                assert!(self.is_waiting(), "client_started can only be sent once");
+                let state = CoreState::new(ctx.get_peer());
+                let state = Arc::new(Mutex::new(state));
+                *self = UnitRpc::Running(state);
+                let weak_self = self.weak_self().unwrap();
+                self.inner().finish_setup(weak_self);
+            }
+            CoreNotification::Version { .. } => {}
+            CoreNotification::Initialize { .. } => {}
         }
 
         self.inner().client_notification(rpc);
     }
 
-    fn handle_request(&mut self, ctx: &RpcCtx, rpc: Self::Request) -> Result<Value, RemoteError> {
+    fn handle_request(&mut self, _ctx: &RpcCtx, rpc: Self::Request) -> Result<Value, RemoteError> {
         self.inner().client_request(rpc)
     }
 

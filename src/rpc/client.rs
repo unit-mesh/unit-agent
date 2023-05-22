@@ -1,5 +1,5 @@
-use xi_rpc::{Peer, RpcPeer};
 use serde_json::json;
+use xi_rpc::RpcPeer;
 
 pub struct Client(pub(crate) RpcPeer);
 
