@@ -1,4 +1,20 @@
 import {execa} from 'execa';
+import chalk from 'chalk';
+
+function formatLog(msg) {
+    const logPattern = /^\[(\d{4}-\d{2}-\d{2})]\[(\d{2}:\d{2}:\d{2})]\[(\w+)]\[(\w+)] (.*)$/;
+    const match = logPattern.exec(msg);
+
+    const date = match[1];
+    const time = match[2];
+    const logger = match[3];
+    const level = match[4];
+    const message = match[5];
+
+    // console.log(chalk.blue(date), chalk.magenta(time), chalk.yellow(logger), chalk.green(level), message);
+    // format the log message: [2023-05-22][23:31:20][unit_agent][INFO] Logging with fern is set up
+    return `${chalk.blue(date)} ${chalk.magenta(time)} ${chalk.yellow(logger)} ${chalk.green(level)} ${message}`
+}
 
 class RpcClient {
     constructor() {
@@ -21,7 +37,7 @@ class RpcClient {
                     return;
                 }
 
-                console.info(msg);
+                console.info(formatLog(msg));
             });
         });
     }

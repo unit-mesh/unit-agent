@@ -19,6 +19,7 @@
   "type": "module",
   "homepage": "https://github.com/unit-mesh/unit-lsp-server#readme",
   "dependencies": {
+    "chalk": "^5.2.0",
     "execa": "^7.1.1",
     "vscode-jsonrpc": "^8.1.0"
   }

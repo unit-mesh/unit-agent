@@ -38,7 +38,6 @@ fn setup_logging(logging_path: Option<&Path>) -> Result<(), fern::InitError> {
             "debug" => log::LevelFilter::Debug,
             _ => log::LevelFilter::Info,
         },
-        // Default to info
         Err(_) => log::LevelFilter::Info,
     };
 
