@@ -1,7 +1,7 @@
 import {execa} from 'execa';
 
 async function main() {
-    const child = execa('target/debug/ulsp', [], {});
+    const child = execa('target/debug/unit_agent', [], {});
 
     child.on('close', (data) => {
         console.log(data);

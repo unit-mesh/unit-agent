@@ -28,10 +28,7 @@ impl CoreState {
 
     pub(crate) fn client_notification(&mut self, cmd: CoreNotification) {
         match cmd {
-            ClientStarted { .. } => (
-                self.peer.send_client_started()
-            ),
-            TracingConfig { .. } => {}
+            ClientStarted { .. } => (),
         }
     }
 
@@ -41,14 +38,11 @@ impl CoreState {
             Version { .. } => {
                 Ok(json!(1))
             }
-            Initialize { .. } => {
-                Ok(json!(1))
-            }
         }
     }
 
     pub(crate) fn finish_setup(&mut self, _self_ref: WeakStadalCore) {
-        self.peer.0.send_rpc_notification("config_status", &json!({ "success": true }))
+        self.peer.send_client_started()
     }
 
     pub(crate) fn handle_idle(&mut self, token: usize) {

@@ -5,9 +5,6 @@ use std::path::PathBuf;
 #[serde(rename_all = "snake_case")]
 #[serde(tag = "method", content = "params")]
 pub enum CoreNotification {
-    TracingConfig {
-        enabled: bool,
-    },
     ClientStarted {
         #[serde(default)]
         config_dir: Option<PathBuf>,

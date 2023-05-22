@@ -59,13 +59,6 @@ impl Handler for UnitRpc {
     fn handle_notification(&mut self, ctx: &RpcCtx, rpc: Self::Notification) {
         // We allow tracing to be enabled before event `client_started`
         match rpc {
-            TracingConfig { enabled } => {
-                info!("tracing in core = {:?}", enabled);
-                if self.is_waiting() {
-                    return;
-                }
-            }
-            #[allow(unused_variables)]
             ClientStarted {
                 ref config_dir,
                 ref client_extras_dir,

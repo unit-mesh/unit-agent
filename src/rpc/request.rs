@@ -6,6 +6,5 @@ use serde::{Deserialize, Serialize};
 pub enum CoreRequest {
     Version {
         version: String,
-    },
-    Initialize {},
+    }
 }
