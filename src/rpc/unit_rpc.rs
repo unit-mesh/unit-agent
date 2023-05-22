@@ -65,6 +65,7 @@ impl Handler for UnitRpc {
                     return;
                 }
             }
+            #[allow(unused_variables)]
             ClientStarted {
                 ref config_dir,
                 ref client_extras_dir,

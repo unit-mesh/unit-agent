@@ -17,6 +17,7 @@ fn main() {
     process_languages();
 }
 
+#[allow(dead_code)]
 fn set_index_version() {
     use std::fs::{read_dir, read_to_string};
 

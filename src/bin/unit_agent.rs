@@ -99,6 +99,7 @@ fn main() {
     }
 }
 
+#[allow(dead_code)]
 fn try_parse_by_language() {
     let src = r#"
             #include <stdio.h>ª
