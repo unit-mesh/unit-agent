@@ -4,5 +4,8 @@ use serde::{Deserialize, Serialize};
 #[serde(rename_all = "snake_case")]
 #[serde(tag = "method", content = "params")]
 pub enum CoreRequest {
-    GetConfig {},
+    Version {
+        version: String,
+    },
+    Initialize {},
 }

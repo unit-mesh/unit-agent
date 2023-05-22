@@ -6,7 +6,7 @@ use xi_rpc::{RemoteError, RpcPeer};
 use tracing::info;
 use client::Client;
 use notification::CoreNotification;
-use notification::CoreNotification::{ClientStarted, Initialize, TracingConfig, Version};
+use notification::CoreNotification::{ClientStarted, TracingConfig};
 use request::CoreRequest;
 
 mod notification;
@@ -28,19 +28,22 @@ impl CoreState {
 
     pub(crate) fn client_notification(&mut self, cmd: CoreNotification) {
         match cmd {
-            Initialize {} => {
-                self.peer.send_initialize();
-            }
-            ClientStarted { .. } => (),
+            ClientStarted { .. } => (
+                self.peer.send_client_started()
+            ),
             TracingConfig { .. } => {}
-            Version { .. } => {}
         }
     }
 
     pub(crate) fn client_request(&mut self, cmd: CoreRequest) -> Result<Value, RemoteError> {
         use request::CoreRequest::*;
         match cmd {
-            GetConfig {} => Ok(json!(1)),
+            Version { .. } => {
+                Ok(json!(1))
+            }
+            Initialize { .. } => {
+                Ok(json!(1))
+            }
         }
     }
 

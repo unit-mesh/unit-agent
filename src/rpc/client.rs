@@ -8,7 +8,7 @@ impl Client {
         Client(peer)
     }
 
-    pub fn send_initialize(&self) {
+    pub fn send_client_started(&self) {
         self.0.send_rpc_notification(
             "initialize",
             &json!({

@@ -77,8 +77,6 @@ impl Handler for UnitRpc {
                 let weak_self = self.weak_self().unwrap();
                 self.inner().finish_setup(weak_self);
             }
-            CoreNotification::Version { .. } => {}
-            CoreNotification::Initialize { .. } => {}
         }
 
         self.inner().client_notification(rpc);

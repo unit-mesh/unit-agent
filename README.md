@@ -38,10 +38,8 @@ Support for IDE features:
 
 ## JSON RPC Protocol
 
-- Protocol Specification (compatible with Copilot ?)
+- Notifications
   - `client_started` or `initialize`
-  - status
-  - version
   - notify/show
   - notify/accepted
   - notify/rejected
@@ -49,6 +47,10 @@ Support for IDE features:
   - workspace/file-open
   - workspace/file-change
   - workspace/file-close
+- Request
+  - status/get
+  - editor/info
+  - version/get
   - completion/once
   - completion/cycling
   - completion/solutions
