@@ -15,8 +15,14 @@ class RpcClient {
             });
         });
 
-        this.child.stderr.on('data', (data) => {
-            console.info(`${data}`);
+        this.child.stderr.on('data', (raw) => {
+            raw.split('\n').forEach((msg) => {
+                if (msg === '') {
+                    return;
+                }
+
+                console.info(msg);
+            });
         });
     }
 
