@@ -5,10 +5,10 @@
 
 Todos:
 
-- [ ] TreeSitter parser for unit
-    - [ ] based on: [https://github.com/BloopAI/bloop/tree/main](https://github.com/BloopAI/bloop/tree/main)
-- [ ] Json RPC server with [xi-rpc](https://crates.io/crates/xi-rpc)
-    - [ ] CLI
+- [x] TreeSitter parser for unit
+    - [x] based on: [https://github.com/BloopAI/bloop/tree/main](https://github.com/BloopAI/bloop/tree/main)
+- [x] Json RPC server with [xi-rpc](https://crates.io/crates/xi-rpc)
+    - [x] CLI
 - [ ] Support completion type
     - [ ] Inline
     - [ ] AfterLineEnd
