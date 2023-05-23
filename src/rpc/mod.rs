@@ -30,6 +30,9 @@ impl CoreState {
     pub(crate) fn client_notification(&mut self, cmd: CoreNotification) {
         match cmd {
             CoreNotification::ClientStarted { .. } => {}
+            CoreNotification::WorkspaceFileOpened { .. } => {}
+            CoreNotification::WorkspaceFileClosed { .. } => {}
+            CoreNotification::WorkspaceFileChanged { .. } => {}
         }
     }
 

@@ -5,6 +5,18 @@ use std::path::PathBuf;
 #[serde(rename_all = "snake_case")]
 #[serde(tag = "method", content = "params")]
 pub enum CoreNotification {
+    WorkspaceFileOpened {
+        uri: String,
+        language_id: String,
+        text: String,
+    },
+    WorkspaceFileClosed {
+        uri: String,
+    },
+    WorkspaceFileChanged {
+        uri: String,
+        text: String,
+    },
     ClientStarted {
         #[serde(default)]
         config_dir: Option<PathBuf>,

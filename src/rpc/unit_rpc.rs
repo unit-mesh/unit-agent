@@ -71,6 +71,9 @@ impl Handler for UnitRpc {
                 let weak_self = self.weak_self().unwrap();
                 self.inner().finish_setup(weak_self);
             }
+            CoreNotification::WorkspaceFileOpened { .. } => {}
+            CoreNotification::WorkspaceFileClosed { .. } => {}
+            CoreNotification::WorkspaceFileChanged { .. } => {}
         }
 
         self.inner().client_notification(rpc);
