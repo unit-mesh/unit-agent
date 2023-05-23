@@ -1,5 +1,6 @@
 use std::path::Path;
 use std::sync::Arc;
+use ndarray::Axis;
 
 use ort::{
     tensor::{FromArray, InputTensor, OrtOwnedTensor},
@@ -30,6 +31,9 @@ fn main() -> Result<(), anyhow::Error> {
     let sequence = "Hello, world!";
     let tokenizer_output = tokenizer.encode(sequence, true).unwrap();
 
+    // Origin: Hello, world!
+    // ids: 101, 7592, 1010, 2088, 999, 102
+    // map: [CLS] hello , world ! [SEP]
     println!("{:?}", tokenizer_output.get_ids());
 
     let session: Arc<ort::Session> = SessionBuilder::new(&environment)?
@@ -37,6 +41,38 @@ fn main() -> Result<(), anyhow::Error> {
         .with_intra_threads(threads)?
         .with_model_from_file(model_dir.join("model.onnx"))?
         .into();
+
+    let input_ids = tokenizer_output.get_ids();
+    let attention_mask = tokenizer_output.get_attention_mask();
+    let token_type_ids = tokenizer_output.get_type_ids();
+    let length = input_ids.len();
+
+    let inputs_ids_array = ndarray::Array::from_shape_vec(
+        (1, length),
+        input_ids.iter().map(|&x| x as i64).collect(),
+    )?;
+
+    let attention_mask_array = ndarray::Array::from_shape_vec(
+        (1, length),
+        attention_mask.iter().map(|&x| x as i64).collect(),
+    )?;
+
+    let token_type_ids_array = ndarray::Array::from_shape_vec(
+        (1, length),
+        token_type_ids.iter().map(|&x| x as i64).collect(),
+    )?;
+
+    let outputs = session.run([
+        InputTensor::from_array(inputs_ids_array.into_dyn()),
+        InputTensor::from_array(attention_mask_array.into_dyn()),
+        InputTensor::from_array(token_type_ids_array.into_dyn()),
+    ])?;
+
+    let output_tensor: OrtOwnedTensor<f32, _> = outputs[0].try_extract().unwrap();
+    let sequence_embedding = &*output_tensor.view();
+    let pooled = sequence_embedding.mean_axis(Axis(1)).unwrap();
+
+    println!("{:?}", pooled.to_owned().as_slice().unwrap().to_vec());
 
     Ok(())
 }

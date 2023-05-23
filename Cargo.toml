@@ -24,6 +24,7 @@ color-eyre = "0.6.2"
 # embedding
 ort = "1.14.6"
 tokenizers = "0.13.3"
+ndarray = "0.15"
 
 # for debugging
 console-subscriber = { version = "0.1.8", optional = true }
