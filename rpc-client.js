@@ -90,7 +90,16 @@ class RpcClient {
         this.send_notification('initialize', {});
         this.send_request('config', {"open_ai_token": config["OPEN_AI_TOKEN"]});
     }
+
+    stop() {
+        this.child.kill();
+    }
 }
 
 const client = new RpcClient();
 client.start();
+
+// for testing
+setTimeout(() => {
+    client.stop();
+}, 500);
