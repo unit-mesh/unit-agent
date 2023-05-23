@@ -45,6 +45,11 @@ impl CoreState {
                     "success": true
                 }))
             }
+            CompletionOnce { document } => {
+                Ok(json!({
+                    "status": "todo!()"
+                }))
+            }
         }
     }
 

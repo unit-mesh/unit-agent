@@ -2,8 +2,49 @@ import {execa} from 'execa';
 import chalk from 'chalk';
 import dotenv from "dotenv";
 
+class Position {
+    constructor(line, character) {
+        this.line = line;
+        this.character = character;
+    }
+}
+
+class VirtualFileUri {
+    constructor(uri) {
+        this.uri = uri;
+    }
+}
+
+class Document {
+    constructor(position, useSpaces, tabSize, uri, version) {
+        this.position = position;
+        this.useSpaces = useSpaces;
+        this.tabSize = tabSize;
+        this.uri = uri.uri;
+        this.version = version;
+    }
+}
+
+class NotifyShownCommand {
+    constructor(uuid) {
+        this.uuid = uuid;
+    }
+}
+
+class NotifyAcceptedCommand {
+    constructor(uuid) {
+        this.uuid = uuid;
+    }
+}
+
+class NotifyRejectedCommand {
+    constructor(uuids) {
+        this.uuids = uuids;
+    }
+}
+
 function formatLog(msg) {
-    const logPattern = /^\[(\d{4}-\d{2}-\d{2})]\[(\d{2}:\d{2}:\d{2})]\[(\w+)]\[(\w+)] (.*)$/;
+    const logPattern = /^\[(\d{4}-\d{2}-\d{2})]\[(\d{2}:\d{2}:\d{2})]\[(.*)]\[(.*)] (.*)$/;
     const match = logPattern.exec(msg);
 
     const date = match[1];
@@ -23,7 +64,7 @@ class RpcClient {
     constructor() {
         this.child = execa('target/debug/unit_agent', [], {});
         this.child.on('close', (data) => {
-            console.log(data);
+            console.log(`child process exited with code: ${data}`);
         });
         this.child.stdout.setEncoding('utf8');
         this.child.stderr.setEncoding('utf8');
@@ -40,7 +81,11 @@ class RpcClient {
                     return;
                 }
 
-                console.info(formatLog(msg));
+                try {
+                    console.info(formatLog(msg));
+                } catch (err) {
+                    console.error(`Error parsing message from core: ${err}`);
+                }
             });
         });
     }
@@ -55,8 +100,7 @@ class RpcClient {
             try {
                 parsed.push(JSON.parse(lines[i]));
             } catch (err) {
-                console.warn('Error parsing message from core!');
-                console.error(err);
+                console.error(`Error parsing message from core: ${err}`);
             }
         }
         return parsed;
@@ -68,7 +112,7 @@ class RpcClient {
             this.child.stdin.write(`${JSON.stringify(data)}\n`);
             return true;
         } catch (e) {
-            console.error(e);
+            console.error(`Error sending message to core: ${e}`);
             return false;
         }
     }
@@ -92,6 +136,7 @@ class RpcClient {
     }
 
     stop() {
+        this.send_notification('shutdown', {})
         this.child.kill();
     }
 }
@@ -101,5 +146,7 @@ client.start();
 
 // for testing
 setTimeout(() => {
+    let document = new Document(new Position(0, 0), true, 4, new VirtualFileUri("file:///home/alex/Projects/unit-agent/rpc-client.js"), 1);
+    client.send_request('completion_once', {document});
     client.stop();
 }, 500);
