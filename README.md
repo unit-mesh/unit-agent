@@ -17,44 +17,44 @@ Todos:
 Support for IDE features:
 
 - [ ] Chat with IDE
-  - [ ] Generate test
-  - [ ] 实现：`重现 xx 功能`, `devti:/chat/feature`
-  - [ ] 重构：`重构 xx 方法`
-  - [ ] 替换：`替换 xx 方法`，`devti:/refactor/method`
+    - [ ] Generate test
+    - [ ] 实现：`重现 xx 功能`, `devti:/chat/feature`
+    - [ ] 重构：`重构 xx 方法`
+    - [ ] 替换：`替换 xx 方法`，`devti:/refactor/method`
 - [x] Custom LLM Server
 - [ ] Telemetry Server
-  - [ ] Accept
-  - [ ] Reject
-  - [ ] Feedback
+    - [ ] Accept
+    - [ ] Reject
+    - [ ] Feedback
 - [ ] Context Engineering
-  - [ ] Open Tabs
-  - [ ] Related Files
-  - [ ] with Dependency Context
-    - [ ] parse Gradle for dependencies
-- [ ] Local Model  
-  - [ ] Local Embedding / Model with Onnx ?
-  - [ ] Local Conversation converter.
-  - [ ] Max Token Usage with Model specific ?
+    - [ ] Open Tabs
+    - [ ] Related Files
+    - [ ] with Dependency Context
+        - [ ] parse Gradle for dependencies
+- [ ] Local Model
+    - [ ] Local Embedding / Model with Onnx ?
+    - [ ] Local Conversation converter.
+    - [ ] Max Token Usage with Model specific ?
 
 ## JSON RPC Protocol
 
 - Notifications
-  - `client_started` or `initialize`
-  - notify/show
-  - notify/accepted
-  - notify/rejected
-  - workspace/dependencies
-  - workspace/file-open
-  - workspace/file-change
-  - workspace/file-close
+    - client_started
+    - notify_show
+    - notify_accepted
+    - notify_rejected
+    - workspace_dependencies
+    - workspace_file-open
+    - workspace_file-change
+    - workspace_file-close
 - Request
-  - config 
-  - status/get
-  - editor/info
-  - version/get
-  - completion/once
-  - completion/cycling
-  - completion/solutions
+    - config
+    - status_get
+    - editor_info
+    - version_get
+    - completion_once
+    - completion_cycling
+    - completion_solutions
 
 ## LICENSE
 
