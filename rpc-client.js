@@ -1,5 +1,6 @@
 import {execa} from 'execa';
 import chalk from 'chalk';
+import dotenv from "dotenv";
 
 function formatLog(msg) {
     const logPattern = /^\[(\d{4}-\d{2}-\d{2})]\[(\d{2}:\d{2}:\d{2})]\[(\w+)]\[(\w+)] (.*)$/;
@@ -83,8 +84,11 @@ class RpcClient {
     }
 
     start() {
+        let config = dotenv.config().parsed;
+        console.info(`dotenv config: ${JSON.stringify(config)}`)
+
         this.send_notification('client_started', {});
-        this.send_request('config', {"open_ai_token": "sk-xxx"});
+        this.send_request('config', {"open_ai_token": config["OPEN_AI_TOKEN"]});
     }
 }
 
