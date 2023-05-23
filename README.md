@@ -33,6 +33,7 @@ Support for IDE features:
         - [ ] parse Gradle for dependencies
 - [ ] Local Model
     - [ ] Local Embedding / Model with Onnx ?
+        - [ ] with SentenceTransformer?
     - [ ] Local Conversation converter.
     - [ ] Max Token Usage with Model specific ?
 
