@@ -17,10 +17,8 @@ pub enum CoreNotification {
         uri: String,
         text: String,
     },
-    ClientStarted {
+    Initialize {
         #[serde(default)]
         config_dir: Option<PathBuf>,
-        #[serde(default)]
-        client_extras_dir: Option<PathBuf>,
     },
 }

@@ -39,7 +39,7 @@ Support for IDE features:
 ## JSON RPC Protocol
 
 - Notifications
-    - client_started
+    - initialize
     - notify_show
     - notify_accepted
     - notify_rejected

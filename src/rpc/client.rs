@@ -12,9 +12,8 @@ impl Client {
 
     pub fn send_client_started(&self) {
         self.0.send_rpc_notification(
-            "started",
+            "client_started",
             &json!({
-                "name": "started",
                 "version": VERSION,
             }),
         );

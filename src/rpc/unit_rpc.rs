@@ -5,7 +5,7 @@ use xi_rpc::{Handler, RemoteError, RpcCtx};
 
 use crate::rpc::{CoreState, WeakCoreState};
 use crate::rpc::notification::CoreNotification;
-use crate::rpc::notification::CoreNotification::ClientStarted;
+use crate::rpc::notification::CoreNotification::Initialize;
 use crate::rpc::request::CoreRequest;
 
 pub enum UnitRpc {
@@ -60,10 +60,7 @@ impl Handler for UnitRpc {
     fn handle_notification(&mut self, ctx: &RpcCtx, rpc: Self::Notification) {
         // We allow tracing to be enabled before event `client_started`
         match rpc {
-            ClientStarted {
-                ref config_dir,
-                ref client_extras_dir,
-            } => {
+            Initialize { ref config_dir, } => {
                 assert!(self.is_waiting(), "client_started can only be sent once");
                 let state = CoreState::new(ctx.get_peer());
                 let state = Arc::new(Mutex::new(state));

@@ -87,7 +87,7 @@ class RpcClient {
         let config = dotenv.config().parsed;
         console.info(`dotenv config: ${JSON.stringify(config)}`)
 
-        this.send_notification('client_started', {});
+        this.send_notification('initialize', {});
         this.send_request('config', {"open_ai_token": config["OPEN_AI_TOKEN"]});
     }
 }
