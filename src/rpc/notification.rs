@@ -21,4 +21,5 @@ pub enum CoreNotification {
         #[serde(default)]
         config_dir: Option<PathBuf>,
     },
+    Shutdown,
 }

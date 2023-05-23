@@ -71,9 +71,9 @@ impl Handler for UnitRpc {
             CoreNotification::WorkspaceFileOpened { .. } => {}
             CoreNotification::WorkspaceFileClosed { .. } => {}
             CoreNotification::WorkspaceFileChanged { .. } => {}
+            CoreNotification::Shutdown => {}
         }
-
-        self.inner().client_notification(rpc);
+        // self.inner().client_notification(rpc);
     }
 
     fn handle_request(&mut self, _ctx: &RpcCtx, rpc: Self::Request) -> Result<Value, RemoteError> {

@@ -137,7 +137,9 @@ class RpcClient {
 
     stop() {
         this.send_notification('shutdown', {})
-        this.child.kill();
+        this.child.kill('SIGTERM', {
+            forceKillAfterTimeout: 2000
+        });
     }
 }
 

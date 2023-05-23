@@ -27,14 +27,15 @@ impl CoreState {
         }
     }
 
-    pub(crate) fn client_notification(&mut self, cmd: CoreNotification) {
-        match cmd {
-            CoreNotification::Initialize { .. } => {}
-            CoreNotification::WorkspaceFileOpened { .. } => {}
-            CoreNotification::WorkspaceFileClosed { .. } => {}
-            CoreNotification::WorkspaceFileChanged { .. } => {}
-        }
-    }
+    // pub(crate) fn client_notification(&mut self, cmd: CoreNotification) {
+    //     match cmd {
+    //         CoreNotification::Initialize { .. } => {}
+    //         CoreNotification::WorkspaceFileOpened { .. } => {}
+    //         CoreNotification::WorkspaceFileClosed { .. } => {}
+    //         CoreNotification::WorkspaceFileChanged { .. } => {}
+    //         CoreNotification::Shutdown => {}
+    //     }
+    // }
 
     pub(crate) fn client_request(&mut self, cmd: CoreRequest) -> Result<Value, RemoteError> {
         use request::CoreRequest::*;
