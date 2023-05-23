@@ -17,6 +17,8 @@ function formatLog(msg) {
 }
 
 class RpcClient {
+    id = 0;
+
     constructor() {
         this.child = execa('target/debug/unit_agent', [], {});
         this.child.on('close', (data) => {
@@ -70,9 +72,19 @@ class RpcClient {
         }
     }
 
+    send_notification(method, params) {
+        this.send(method, params, {});
+    }
+
+    send_request(method, params) {
+        const id = this.id++;
+        this.send(method, params, {id});
+        return id;
+    }
+
     start() {
-        this.send('client_started', {});
-        this.send('config', {"open_ai_token": "sk-xxx"}, {id: 0});
+        this.send_notification('client_started', {});
+        this.send_request('config', {"open_ai_token": "sk-xxx"});
     }
 }
 

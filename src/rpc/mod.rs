@@ -42,8 +42,7 @@ impl CoreState {
             Config { open_ai_token, .. } => {
                 self.token = Some(open_ai_token);
                 Ok(json!({
-                    "success": true,
-                    "name": "client",
+                    "success": true
                 }))
             }
         }
