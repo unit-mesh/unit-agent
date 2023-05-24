@@ -50,6 +50,8 @@ Support for IDE features:
     - workspace_file-close
 - Request
     - config
+    - sign_in
+    - sign_out
     - editor_info
     - version_get
     - completion_once
