@@ -14,23 +14,18 @@ pub struct Semantic {
     session: Arc<ort::Session>,
 }
 
-
 fn main() -> Result<(), anyhow::Error> {
     let model_dir = Path::new(env!("CARGO_MANIFEST_DIR")).join("model");
     let semantic = tokio::runtime::Runtime::new().unwrap().block_on(async {
         Semantic::initialize(&model_dir).await.unwrap()
     });
 
-    let seq = semantic.embed("Hello, world!");
+    let sequence = "Hello, world!";
+    let tokenizer_output = semantic.tokenizer.encode(sequence, true).unwrap();
+    println!("{:?}", tokenizer_output.get_ids());
+
+    let seq = semantic.embed(sequence);
     println!("{:?}", seq);
-
-    // let sequence = "Hello, world!";
-    // let tokenizer_output = tokenizer.encode(sequence, true).unwrap();
-
-    // Origin: Hello, world!
-    // ids: 101, 7592, 1010, 2088, 999, 102
-    // map: [CLS] hello , world ! [SEP]
-    // println!("{:?}", tokenizer_output.get_ids());
 
     Ok(())
 }
@@ -102,6 +97,7 @@ impl Semantic {
         let output_tensor: OrtOwnedTensor<f32, _> = outputs[0].try_extract().unwrap();
         let sequence_embedding = &*output_tensor.view();
         let pooled = sequence_embedding.mean_axis(Axis(1)).unwrap();
+
         Ok(pooled.to_owned().as_slice().unwrap().to_vec())
     }
 }
