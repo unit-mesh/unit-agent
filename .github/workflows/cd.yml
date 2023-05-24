@@ -16,14 +16,14 @@ jobs:
       matrix:
         include:
           - os: ubuntu-latest
-            artifact_name: ulsp
-            asset_name: ulsp-linux-amd64
+            artifact_name: unit_agent
+            asset_name: unit_agent-linux-amd64
           - os: windows-latest
-            artifact_name: ulsp.exe
-            asset_name: ulsp-windows-amd64
+            artifact_name: unit_agent.exe
+            asset_name: unit_agent-windows-amd64
           - os: macos-latest
-            artifact_name: ulsp
-            asset_name: ulsp-macos-amd64
+            artifact_name: unit_agent
+            asset_name: unit_agent-macos-amd64
 
     steps:
       - uses: actions/checkout@v2
