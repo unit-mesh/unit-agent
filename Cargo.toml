@@ -1,6 +1,6 @@
 [package]
 name = "unit-lsp"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2021"
 default-run = "unit_agent"
 build = "build.rs"
