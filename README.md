@@ -9,10 +9,6 @@ Todos:
     - [x] based on: [https://github.com/BloopAI/bloop/tree/main](https://github.com/BloopAI/bloop/tree/main)
 - [x] Json RPC server with [xi-rpc](https://crates.io/crates/xi-rpc)
     - [x] CLI
-- [ ] Support completion type
-    - [ ] Inline
-    - [ ] AfterLineEnd
-    - [ ] Block
 
 Support for IDE features:
 
@@ -36,6 +32,16 @@ Support for IDE features:
         - [ ] with SentenceTransformer?
     - [ ] Local Conversation converter.
     - [ ] Max Token Usage with Model specific ?
+
+Completion type
+
+- [ ] Code completion type
+  - [ ] Inline
+  - [ ] AfterLineEnd
+  - [ ] Block
+- [ ] Completion Solution Type
+  - [ ] Panel
+  - [ ] Solutions?
 
 ## JSON RPC Protocol
 
