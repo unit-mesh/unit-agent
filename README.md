@@ -32,16 +32,20 @@ Support for IDE features:
         - [ ] with SentenceTransformer?
     - [ ] Local Conversation converter.
     - [ ] Max Token Usage with Model specific ?
+- [ ] Command
+    - [ ] IO Command
+    - [ ] Refactor Command / Replacer
+    - [ ] Analysis Command / Analyzer
 
 Completion type
 
 - [ ] Code completion type
-  - [ ] Inline
-  - [ ] AfterLineEnd
-  - [ ] Block
+    - [ ] Inline
+    - [ ] AfterLineEnd
+    - [ ] Block
 - [ ] Completion Solution Type
-  - [ ] Panel
-  - [ ] Solutions?
+    - [ ] Panel
+    - [ ] Solutions?
 
 ## JSON RPC Protocol
 
