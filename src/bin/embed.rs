@@ -96,9 +96,31 @@ impl Semantic {
 
         let output_tensor: OrtOwnedTensor<f32, _> = outputs[0].try_extract().unwrap();
         let sequence_embedding = &*output_tensor.view();
+        println!("{}", sequence_embedding.len());
         let pooled = sequence_embedding.mean_axis(Axis(1)).unwrap();
+        println!("{}", pooled.len());
 
         Ok(pooled.to_owned().as_slice().unwrap().to_vec())
     }
 }
 
+
+#[cfg(test)]
+mod tests {
+    use std::path::Path;
+    use std::sync::Arc;
+    use crate::Semantic;
+
+    #[tokio::test]
+    async fn test_mmr() {
+        let model_dir = Path::new(env!("CARGO_MANIFEST_DIR"))
+            .join("model");
+        let semantic = Semantic::initialize(&*model_dir).await.unwrap();
+
+        let result = semantic.embed("blog");
+        println!("{:?}", result.unwrap());
+
+        let result = semantic.embed("what a wonderful day");
+        println!("{:?}", result.unwrap());
+    }
+}
